@@ -1,0 +1,88 @@
+*{
+    margin: 0 !important;
+}
+body{
+    background-color: white;
+    
+}
+
+.navbar{
+    background-color: rgb(213, 199, 143)  !important ;
+    height: 5rem;
+}
+
+.nav-item a{
+ margin-left: 8px !important;
+}
+.container-fluid{
+    font-size:larger ;
+}
+.container-fluid a{
+    color: black !important;
+}
+.container-fluid img{
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-left: 5px !important;
+    border-radius: 6px;
+}
+
+.footer{
+    text-align: center;
+    justify-items: center;
+    background-color: #ebebeb;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.footer-icons{
+    font-size: x-large;
+}
+.footer-icons i{
+    margin-right: 3px;
+}
+.footer-links a{
+    text-decoration: none;
+    color: black !important;
+    margin-right: 5px;
+}
+.card{
+    border: none;
+    margin-bottom: 6px !important;
+
+}
+.card-img{
+    height: 18rem;
+    border-radius: 1rem;
+}
+.card-id{
+ text-decoration: none ;
+ color: black !important;
+}
+
+.card-img2{
+    height: 25rem;
+    width: 40rem;
+    border-radius: 1rem;
+}
+.show-card{
+    align-items: center;
+    justify-content: center;
+}
+.card-text2{
+    text-align: justify; 
+}
+.review-form{
+    margin-left: 25rem !important;
+   
+}
+.review, .comment{
+    margin-bottom: 1.5rem !important;
+    margin-top: 1rem !important;
+}
+.btn{
+    margin-bottom: 1rem !important;
+}
+.alert{
+    margin-left: 25rem !important;
+    margin-top: 2rem !important;
+}
