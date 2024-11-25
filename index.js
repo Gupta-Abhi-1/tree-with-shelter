@@ -9,6 +9,14 @@ const {reviewSchema}=require("./Schema.js");
 const methodOverride = require('method-override');
 const session= require("express-session");
 const flash= require("connect-flash");
+const passport= require("passport");
+const LocalStrategy= require("passport-local");
+const User= require("./models/user.js");
+const listingController= require("./controllers/listings.js");
+const reviewController= require("./controllers/reviews.js");
+const userController= require("./controllers/users.js");
+const {reviewAuthor, validateReview}= require("./middleware.js");
+
 
 const engine= require("ejs-mate");
 const path= require("path");
@@ -49,6 +57,12 @@ const sessionOptions={
 };
 app.use(session(sessionOptions));
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.get("/", (req,res)=>{
  res.send("the page is linked")
@@ -56,56 +70,42 @@ app.get("/", (req,res)=>{
 
 app.use((req,res,next)=>{
     res.locals.success= req.flash("success");
+    res.locals.failure= req.flash("failure");
+    res.locals.currUser= req.user;
     next();
 });
 
-const validateReview=(req,res,next)=>{
-    let {err}= reviewSchema.validate(req.body);
-    if(err){
-        let errMsg= err.details.map((el)=> el.msg).join;
-        throw new ExpressError(400,errMsg);
-    }
-    else{
-        next();
-    }
-};
 
 // index route
-app.get("/listings", wrapAsync(async(req,res)=>{
-  const allListings= await Listing.find({});
-   res.render("index.ejs", {allListings})
-   }));
-   
+   app.get("/listings",wrapAsync(listingController.index));
+
 // show route
-app.get("/listings/:id", wrapAsync(async(req,res)=>{
-    let {id}= req.params;
-    const listing= await Listing.findById(id).populate("reviews");
-    res.render("show.ejs", {listing})
-}));
+app.get("/listings/:id", wrapAsync(listingController.show));
 
 // review route
-app.post("/listings/:id/reviews", validateReview, wrapAsync(async(req,res)=>{
-   let listings= await Listing.findById(req.params.id);
-   let newReview= new Review(req.body.review);
-   listings.reviews.push(newReview);
-
-  await newReview.save();
-  await listings.save();
-  console.log("review has saved");
-  req.flash("success","New review has added");
-  res.redirect(`/listings/${listings._id}`);
-}));
+app.post("/listings/:id/reviews", validateReview, wrapAsync(reviewController.review));
 
 // review delete route
-app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async(req,res)=>{
-    let {id, reviewId}= req.params;
-   await Listing.findByIdAndUpdate(id, {$pull:{reviews:reviewId}});
- await  Review.findByIdAndDelete(reviewId);
- redirect(`/listings/${id}`);
-}));
+app.delete("/listings/:id/reviews/:reviewId", reviewAuthor, wrapAsync(reviewController.deleteReview));
 
+// signup route
+app.get("/signup", userController.getSignup);
 
- app.all("*", (req,res,next)=>{
+app.post("/signup", wrapAsync(userController.postSignup));
+
+// login route
+app.get("/login", userController.getLogin);
+
+app.post("/login",
+     passport.authenticate("local", {
+     failureRedirect:("/login"),
+     failureFlash: true}),
+     wrapAsync(userController.postLogin));
+
+    //  logout route
+app.get("/logout", userController.logout);
+
+app.all("*", (req,res,next)=>{
     next(new ExpressError(404, "Page Not Found"));
  });
   

@@ -71,7 +71,7 @@ body{
 .card-text2{
     text-align: justify; 
 }
-.review-form{
+.review-form, .signup-form{
     margin-left: 25rem !important;
    
 }
@@ -85,4 +85,7 @@ body{
 .alert{
     margin-left: 25rem !important;
     margin-top: 2rem !important;
+}
+#nav2{
+    margin-left: 48rem !important;
 }
