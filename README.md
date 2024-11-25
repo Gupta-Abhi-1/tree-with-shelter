@@ -37,7 +37,7 @@ MVC Pattern for Structured Code
 Installation
 To run the project locally:
 
-1. Clone the repository:
+1. Clone the repository:https://github.com/Gupta-Abhi-1/tree-with-shelter
 
 Copy code-
 git clone <repository-url>
