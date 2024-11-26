@@ -11,7 +11,7 @@ main().then(()=>{
 
 async function main(){
     await mongoose.connect(mongo_Url);
-} 
+};
 
 const initDb= async ()=>{
    await Listing.deleteMany({});

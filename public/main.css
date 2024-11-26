@@ -7,7 +7,7 @@ body{
 }
 
 .navbar{
-    background-color: rgb(213, 199, 143)  !important ;
+    background-color: rgb(213, 199, 143)  !important;
     height: 5rem;
 }
 
@@ -15,7 +15,7 @@ body{
  margin-left: 8px !important;
 }
 .container-fluid{
-    font-size:larger ;
+    font-size:larger;
 }
 .container-fluid a{
     color: black !important;

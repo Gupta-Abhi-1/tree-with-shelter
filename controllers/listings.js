@@ -6,7 +6,6 @@ module.exports.index= async(req,res)=>{
      res.render("index.ejs", {allListings})
      };
 
-
     //  show route
    module.exports.show= async(req,res)=>{
         if(!req.isAuthenticated()){
