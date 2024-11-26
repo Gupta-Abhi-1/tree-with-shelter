@@ -27,17 +27,17 @@ The app includes robust error handling middleware to catch and respond to errors
 ![error handeling using wrapasyn](https://drive.google.com/file/d/1Lr67rH-6i_5pVIGcKqTatBXPWKwdEuL6/view?usp=drive_link)
 
 Technologies Used:
-Node.js
-Express.js
-MongoDB
-Passport for Authentication
-Express-session for Session Management
+Node.js,
+Express.js,
+MongoDB,
+Passport for Authentication,
+Express-session for Session Management,
 MVC Pattern for Structured Code
 
 Installation
 To run the project locally:
 
-1. Clone the repository:
+1. Clone the repository:https://github.com/Gupta-Abhi-1/tree-with-shelter
 
 Copy code-
 git clone <repository-url>
